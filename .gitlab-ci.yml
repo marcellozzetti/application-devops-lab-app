@@ -1,6 +1,6 @@
 image: docker:latest
 services:
-  - docker:dind
+  - docker:stable-dind
 
 variables:
   DOCKER_DRIVER: overlay
@@ -8,23 +8,52 @@ variables:
 
 stages:
   - build
+  - analysis
   - package
 #  - deploy
+
+
+########                  ########
+########     Build        ########
+########                  ########
+
+########   Build Maven    ########
 
 maven-build:
   image: maven:3-jdk-8
   stage: build
-  script: "mvn package -B"
+  script: "mvn package -B -Dmaven.test.skip=true"
   artifacts:
     paths:
       - target/*.jar
 
+########                    ########
+########    Check Analysis  ########
+########                    ########
+
+########   Sonar & Test.    ########
+
+run-analysis:
+  image: maven:3-jdk-11-slim
+  stage: analysis
+  script:
+    - mvn dependency:go-offline verify sonar:sonar -Dsonar.projectKey=com.devops.lab:lab-app -Dsonar.host.url=http://10.0.22.67:9000 -Dsonar.login=squ_c3bb4ef988ac4a93221938fb34cd1d213a79e192 -Dsonar.qualitygate.wait=true -B
+  artifacts:
+    paths:
+      - target/*.jar
+
+########                   ########
+########    Package        ########
+########                   ########
+
+########   Docker Build   ########
+
 docker-build:
   stage: package
   script:
-  - docker build -t registry.devops-lab.tech/marcello.ozzetti/lab-app .
+  - docker build -t registry.devops-lab.tech/marcello.ozzetti/application-devops-lab-app .
   - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.devops-lab.tech
-  - docker push registry.devops-lab.tech/marcello.ozzetti/lab-app
+  - docker push registry.devops-lab.tech/marcello.ozzetti/application-devops-lab-app
 
 #k8s-deploy:
 #  image: google/cloud-sdk
