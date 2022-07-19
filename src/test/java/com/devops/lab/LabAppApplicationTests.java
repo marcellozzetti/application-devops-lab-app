@@ -19,11 +19,10 @@ class LabAppApplicationTests {
 
 	@Test
 	public void shouldReturnOurText() throws Exception {
+
 		this.mockMvc
 				.perform(get("/greeting").param("name", "Ozzetti" )) // perform a request that can be chained
 				.andDo(print()) // we log the result
 				.andExpect(content().string(containsString("Hello, Ozzetti!"))); // we check that the Body of the answer contains our expectation
 	}
-
-
 }
