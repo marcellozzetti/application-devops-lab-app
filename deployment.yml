@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: lab-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: lab-app
+    spec:
+      containers:
+      - name: lab-app
+        image: registry.devops-lab.tech/marcello.ozzetti/lab-app
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+      imagePullSecrets:
+        - name: registry.devops-lab.tech
