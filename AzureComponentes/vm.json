@@ -1,0 +1,71 @@
+{
+    "name": "DevOpsLabVM",
+    "id": "/subscriptions/c0522196-e734-4fc8-8ccb-d1c6a73ff363/resourceGroups/ResourceGroup-DevOpsLab-EUS2/providers/Microsoft.Compute/virtualMachines/DevOpsLabVM",
+    "type": "Microsoft.Compute/virtualMachines",
+    "location": "eastus2",
+    "properties": {
+        "vmId": "a41ecfb0-d58d-49eb-880b-24aeac235ed5",
+        "hardwareProfile": {
+            "vmSize": "Standard_B2s"
+        },
+        "storageProfile": {
+            "imageReference": {
+                "publisher": "OpenLogic",
+                "offer": "CentOS",
+                "sku": "7_9-gen2",
+                "version": "latest",
+                "exactVersion": "7.9.2022020701"
+            },
+            "osDisk": {
+                "osType": "Linux",
+                "name": "DevOpsLabVM_OsDisk_1_187e1312f20846f3ba59b2ac0c8fbfd2",
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                    "id": "/subscriptions/c0522196-e734-4fc8-8ccb-d1c6a73ff363/resourceGroups/RESOURCEGROUP-DEVOPSLAB-EUS2/providers/Microsoft.Compute/disks/DevOpsLabVM_OsDisk_1_187e1312f20846f3ba59b2ac0c8fbfd2"
+                },
+                "deleteOption": "Delete"
+            },
+            "dataDisks": []
+        },
+        "osProfile": {
+            "computerName": "DevOpsLabVM",
+            "adminUsername": "azureuser",
+            "linuxConfiguration": {
+                "disablePasswordAuthentication": true,
+                "ssh": {
+                    "publicKeys": [
+                        {
+                            "path": "/home/azureuser/.ssh/authorized_keys",
+                            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDkZb90mi+x+VtC6gcTF7tA5tdESIwzZ73Jx3o7djc3fch7ht6GItZtwoGKRTXb+6So7Smz+vgPMQKOV30NcnFMa+wX0xobV9vf4wHhKEBrqRSmb9+pCgbTazqyT1cykbG49wtPF0c876KdE04gxZgS61Q/J6RIX5G/Chrx2bMmmFkyKkoUDJ0hmxVOYVfEojFNlLXAcaO7oEarXFAz6GbtL9aPvSh3oAyVzIHPKAIbIq0zmzEHskLv6gGCnKdI1Cr0h9dH1L16hoYZSiF0BGAkHZDYzzFV2pYjUr5IlXS/ywe8PlIMyVfyiu47coLVpzsCG4D0Xu1fe3Z66h9eibTo8LR1kqKL9HntpQxgt0vnbRSYV4o1iElyBQY1Ioe8tgOlg8+Su0EkvZcq6ahykqsatimnk9LmFyeBs1rGr+K/a9KXeZNkRYyjCkn6ixTw/I5A2i4kmAmdMlV8n+rNG04IT8o4C0OrvhhsnXXlZODuMvQGzhQi4jWsUoGDTQcI4zU= generated-by-azure"
+                        }
+                    ]
+                },
+                "provisionVMAgent": true,
+                "patchSettings": {
+                    "patchMode": "ImageDefault",
+                    "assessmentMode": "ImageDefault"
+                }
+            },
+            "secrets": [],
+            "allowExtensionOperations": true,
+            "requireGuestProvisionSignal": true
+        },
+        "networkProfile": {
+            "networkInterfaces": [
+                {
+                    "id": "/subscriptions/c0522196-e734-4fc8-8ccb-d1c6a73ff363/resourceGroups/ResourceGroup-DevOpsLab-EUS2/providers/Microsoft.Network/networkInterfaces/devopslabvm483",
+                    "properties": {
+                        "deleteOption": "Detach"
+                    }
+                }
+            ]
+        },
+        "diagnosticsProfile": {
+            "bootDiagnostics": {
+                "enabled": true
+            }
+        },
+        "provisioningState": "Succeeded"
+    }
+}
